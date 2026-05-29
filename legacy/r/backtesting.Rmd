@@ -22,7 +22,10 @@ library(tidyr)
 library(reshape2)
 
 
-# Set working directory 
+# Set working directory
+# NOTE: Update this path to your local working directory before knitting.
+# Data files are now located in data/raw/ relative to the repository root.
+# Example: setwd("/path/to/repo/data/raw")
 getwd()
 setwd("/Users/xieweixun/Desktop/QUANT/")
 

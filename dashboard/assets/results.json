@@ -1,0 +1,116 @@
+{
+  "tl_95": [
+    {
+      "Metric": "Hist VaR",
+      "Expected": 121.0,
+      "SP500 Exc.": 133,
+      "SP500 TL": "Green",
+      "CSI Exc.": 108,
+      "CSI TL": "Yellow"
+    },
+    {
+      "Metric": "Hist CVaR",
+      "Expected": 121.0,
+      "SP500 Exc.": 50,
+      "SP500 TL": "Red",
+      "CSI Exc.": 45,
+      "CSI TL": "Red"
+    },
+    {
+      "Metric": "Norm VaR",
+      "Expected": 121.0,
+      "SP500 Exc.": 130,
+      "SP500 TL": "Green",
+      "CSI Exc.": 94,
+      "CSI TL": "Red"
+    },
+    {
+      "Metric": "Norm CVaR",
+      "Expected": 121.0,
+      "SP500 Exc.": 82,
+      "SP500 TL": "Red",
+      "CSI Exc.": 58,
+      "CSI TL": "Red"
+    },
+    {
+      "Metric": "EWMA VaR",
+      "Expected": 121.0,
+      "SP500 Exc.": 202,
+      "SP500 TL": "Green",
+      "CSI Exc.": 172,
+      "CSI TL": "Green"
+    },
+    {
+      "Metric": "EWMA CVaR",
+      "Expected": 121.0,
+      "SP500 Exc.": 50,
+      "SP500 TL": "Red",
+      "CSI Exc.": 44,
+      "CSI TL": "Red"
+    }
+  ],
+  "tl_99": [
+    {
+      "Metric": "Hist VaR",
+      "Expected": 24.2,
+      "SP500 Exc.": 35,
+      "SP500 TL": "Green",
+      "CSI Exc.": 25,
+      "CSI TL": "Green"
+    },
+    {
+      "Metric": "Hist CVaR",
+      "Expected": 24.2,
+      "SP500 Exc.": 12,
+      "SP500 TL": "Red",
+      "CSI Exc.": 12,
+      "CSI TL": "Red"
+    },
+    {
+      "Metric": "Norm VaR",
+      "Expected": 24.2,
+      "SP500 Exc.": 59,
+      "SP500 TL": "Green",
+      "CSI Exc.": 48,
+      "CSI TL": "Green"
+    },
+    {
+      "Metric": "Norm CVaR",
+      "Expected": 24.2,
+      "SP500 Exc.": 47,
+      "SP500 TL": "Green",
+      "CSI Exc.": 34,
+      "CSI TL": "Green"
+    },
+    {
+      "Metric": "EWMA VaR",
+      "Expected": 24.2,
+      "SP500 Exc.": 88,
+      "SP500 TL": "Green",
+      "CSI Exc.": 79,
+      "CSI TL": "Green"
+    },
+    {
+      "Metric": "EWMA CVaR",
+      "Expected": 24.2,
+      "SP500 Exc.": 16,
+      "SP500 TL": "Red",
+      "CSI Exc.": 15,
+      "CSI TL": "Red"
+    }
+  ],
+  "sp500_stats": {
+    "mean": 0.0004694337307254539,
+    "std": 0.011033874087002588,
+    "min": -0.11984050283657066,
+    "max": 0.09382765710199337,
+    "obs": 3521
+  },
+  "csi300_stats": {
+    "mean": 8.812361523789093e-05,
+    "std": 0.0138898505039731,
+    "min": -0.08747917560467355,
+    "max": 0.06714699812718439,
+    "obs": 3392
+  }
+}
