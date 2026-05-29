@@ -160,8 +160,9 @@ The following findings are derived directly from the Python analysis (see notebo
 
 ## Dashboard
 
-A polished static HTML dashboard is available at `dashboard/index.html`. It can be opened
-directly in any browser or hosted on GitHub Pages / Vercel as a static site.
+**Live demo:** [https://tail-risk-backtesting.vercel.app/](https://tail-risk-backtesting.vercel.app/)
+
+A polished static HTML dashboard is also available locally at `dashboard/index.html`.
 
 The dashboard presents:
 - Project overview and summary statistics
@@ -196,8 +197,10 @@ The notebook uses relative paths (`../data/raw/`) and will save figures to
 
 ### Viewing the dashboard
 
-Open `dashboard/index.html` in any browser. All figures are embedded as local PNG files;
-no internet connection is required.
+The dashboard is live at [https://tail-risk-backtesting.vercel.app/](https://tail-risk-backtesting.vercel.app/).
+
+Alternatively, open `dashboard/index.html` locally in any browser. All figures are embedded
+as local PNG files; no internet connection is required.
 
 ---
 
