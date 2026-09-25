@@ -469,7 +469,7 @@
   <div class="hero-tag">Quantitative Risk Analytics &middot; Portfolio Project</div>
   <h1>Comparative Tail Risk Analysis</h1>
   <h2>S&amp;P 500 vs CSI 300</h2>
-  <p>Rolling-window VaR and CVaR estimation with Traffic Light backtesting across two major equity markets. January 2010 &ndash; December 2023.</p>
+  <p>Rolling-window VaR and Expected Shortfall forecasts with Kupiec, Christoffersen, Basel and Acerbi&ndash;Szekely backtests across two major equity markets. January 2010 &ndash; December 2023.</p>
   <div class="hero-links">
     <a class="btn btn-gold" href="https://github.com/weixunxie/tail-risk-backtesting/blob/main/notebooks/tail_risk_analysis.ipynb" target="_blank" rel="noopener">Python Notebook</a>
     <a class="btn btn-outline" href="https://github.com/weixunxie/tail-risk-backtesting/blob/main/reports/backtesting_report.pdf" target="_blank" rel="noopener">Full Report (PDF)</a>
@@ -588,11 +588,11 @@
       </div>
       <div class="method-card">
         <h4>EWMA (&lambda; = 0.94)</h4>
-        <p>Exponentially weighted moving average variance, following RiskMetrics convention. EWMA adapts quickly to volatility clustering by down-weighting older observations.</p>
+        <p>RiskMetrics exponentially weighted variance (&sigma;&sup2;<sub>t</sub> = &lambda;&sigma;&sup2;<sub>t&minus;1</sub> + (1&minus;&lambda;)r&sup2;<sub>t&minus;1</sub>) with a zero-mean Normal VaR and ES. Adapts quickly to volatility clustering.</p>
       </div>
       <div class="method-card">
-        <h4>Traffic Light Backtesting</h4>
-        <p>Exception counts are compared to expected counts over the test period (~10 years). Ratings: <strong style="color:var(--green)">Green</strong> (well-calibrated), <strong style="color:var(--yellow)">Yellow</strong> (moderate deviation), <strong style="color:var(--red)">Red</strong> (&gt;15% below expected).</p>
+        <h4>Formal Backtesting</h4>
+        <p>Kupiec POF (coverage), Christoffersen (independence), Basel binomial traffic-light zones (penalise too many exceptions), and the Acerbi&ndash;Szekely Z2 test for Expected Shortfall. All forecasts are strictly one-day-ahead.</p>
       </div>
     </div>
   </div>
@@ -695,61 +695,68 @@
 <!-- ━━━━━━━━━━━━━━━━━━━━━━━ BACKTESTING RESULTS ━━━━━━━━━━━━━━━━━━ -->
 <section>
   <p class="section-label">Backtesting</p>
-  <h2 class="section-title">Traffic Light Results</h2>
+  <h2 class="section-title">Out-of-Sample Backtest Results</h2>
   <div class="gold-rule"></div>
-  <p style="font-size:14px;color:var(--mid);max-width:700px;margin-bottom:20px;">
-    Exception counts over the full test period versus the expected count under each
-    confidence level. <strong>Green</strong> indicates the model is well-calibrated or
-    slightly conservative; <strong>Yellow/Red</strong> signals deviation &gt;5% or &gt;15%
-    below the expected exception rate (over-conservative model).
+  <p style="font-size:14px;color:var(--mid);max-width:760px;margin-bottom:20px;">
+    Forecasts for day <em>t</em> use data through <em>t&minus;1</em> only; all models share the same test window
+    (S&amp;P 500: 2014-01-07 &rarr; 2023-12-29, n = 2,513;
+    CSI 300: 2014-03-10 &rarr; 2023-12-29, n = 2,384).
+    <strong>Kupiec</strong> tests whether the exception rate matches the nominal level, <strong>Christoffersen</strong> tests whether exceptions cluster,
+    and the <strong>Basel zone</strong> flags too many exceptions (risk under-estimation) via the binomial CDF: Green &lt; 95%, Yellow &lt; 99.99%, Red otherwise.
   </p>
 
   <div class="figure-block" style="margin-bottom:0">
-    <img src="assets/figures/traffic_light_95.png" alt="Traffic Light 95%">
-    <p class="fig-caption">Fig. 6 &mdash; Traffic Light backtesting at 95% confidence level. Dashed line: expected 121 exceptions.</p>
+    <img src="assets/figures/backtest_95.png" alt="VaR backtest 95%">
+    <p class="fig-caption">Fig. 6 &mdash; 95% VaR exceptions by model, coloured by Basel zone, with Kupiec p-values.</p>
+  </div>
+  <div class="figure-block" style="margin-bottom:0">
+    <img src="assets/figures/backtest_99.png" alt="VaR backtest 99%">
+    <p class="fig-caption">Fig. 7 &mdash; 99% VaR exceptions. Normal and EWMA-Normal land in the Red zone in both markets.</p>
   </div>
   <div class="figure-block">
-    <img src="assets/figures/traffic_light_99.png" alt="Traffic Light 99%">
-    <p class="fig-caption">Fig. 7 &mdash; Traffic Light backtesting at 99% confidence level. Dashed line: expected 24.2 exceptions.</p>
+    <img src="assets/figures/basel_rolling_99.png" alt="Rolling Basel zones">
+    <p class="fig-caption">Fig. 8 &mdash; Rolling 250-day exception counts for 99% VaR against the regulatory zones (0&ndash;4 Green, 5&ndash;9 Yellow, 10+ Red).</p>
   </div>
 
   <div class="two-col" style="margin-top:36px;">
-    <div>
-      <h3 style="font-family:var(--serif);font-size:17px;margin-bottom:14px;">At 95% Confidence Level</h3>
-      <div class="tl-table-wrap">
-        <table class="tl-table">
-          <thead>
-            <tr><th>Metric</th><th>Expected</th><th>S&amp;P 500</th><th>Rating</th><th>CSI 300</th><th>Rating</th></tr>
-          </thead>
-          <tbody>
-            <tr><td class="metric">Hist VaR</td><td>121</td><td>133</td><td><span class="tl-badge Green">Green</span></td><td>108</td><td><span class="tl-badge Yellow">Yellow</span></td></tr>
-            <tr><td class="metric">Hist CVaR</td><td>121</td><td>50</td><td><span class="tl-badge Red">Red</span></td><td>45</td><td><span class="tl-badge Red">Red</span></td></tr>
-            <tr><td class="metric">Norm VaR</td><td>121</td><td>130</td><td><span class="tl-badge Green">Green</span></td><td>94</td><td><span class="tl-badge Red">Red</span></td></tr>
-            <tr><td class="metric">Norm CVaR</td><td>121</td><td>82</td><td><span class="tl-badge Red">Red</span></td><td>58</td><td><span class="tl-badge Red">Red</span></td></tr>
-            <tr><td class="metric">EWMA VaR</td><td>121</td><td>202</td><td><span class="tl-badge Green">Green</span></td><td>172</td><td><span class="tl-badge Green">Green</span></td></tr>
-            <tr><td class="metric">EWMA CVaR</td><td>121</td><td>50</td><td><span class="tl-badge Red">Red</span></td><td>44</td><td><span class="tl-badge Red">Red</span></td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div>
-      <h3 style="font-family:var(--serif);font-size:17px;margin-bottom:14px;">At 99% Confidence Level</h3>
-      <div class="tl-table-wrap">
-        <table class="tl-table">
-          <thead>
-            <tr><th>Metric</th><th>Expected</th><th>S&amp;P 500</th><th>Rating</th><th>CSI 300</th><th>Rating</th></tr>
-          </thead>
-          <tbody>
-            <tr><td class="metric">Hist VaR</td><td>24.2</td><td>35</td><td><span class="tl-badge Green">Green</span></td><td>25</td><td><span class="tl-badge Green">Green</span></td></tr>
-            <tr><td class="metric">Hist CVaR</td><td>24.2</td><td>12</td><td><span class="tl-badge Red">Red</span></td><td>12</td><td><span class="tl-badge Red">Red</span></td></tr>
-            <tr><td class="metric">Norm VaR</td><td>24.2</td><td>59</td><td><span class="tl-badge Green">Green</span></td><td>48</td><td><span class="tl-badge Green">Green</span></td></tr>
-            <tr><td class="metric">Norm CVaR</td><td>24.2</td><td>47</td><td><span class="tl-badge Green">Green</span></td><td>34</td><td><span class="tl-badge Green">Green</span></td></tr>
-            <tr><td class="metric">EWMA VaR</td><td>24.2</td><td>88</td><td><span class="tl-badge Green">Green</span></td><td>79</td><td><span class="tl-badge Green">Green</span></td></tr>
-            <tr><td class="metric">EWMA CVaR</td><td>24.2</td><td>16</td><td><span class="tl-badge Red">Red</span></td><td>15</td><td><span class="tl-badge Red">Red</span></td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+<div><h3 style="font-family:var(--serif);font-size:17px;margin-bottom:14px;">VaR &mdash; 95% confidence</h3><div class="tl-table-wrap"><table class="tl-table"><thead><tr><th>Index</th><th>Model</th><th>Exc. / Exp.</th><th>Kupiec p</th><th>Indep. p</th><th>Basel</th></tr></thead><tbody>
+<tr><td class="metric">S&amp;P 500</td><td>Historical</td><td>133 / 125.7</td><td>0.505</td><td>&lt;0.001</td><td><span class="tl-badge Green">Green</span></td></tr>
+<tr><td class="metric">S&amp;P 500</td><td>Normal</td><td>130 / 125.7</td><td>0.692</td><td>&lt;0.001</td><td><span class="tl-badge Green">Green</span></td></tr>
+<tr><td class="metric">S&amp;P 500</td><td>EWMA</td><td>138 / 125.7</td><td>0.266</td><td>0.373</td><td><span class="tl-badge Green">Green</span></td></tr>
+<tr><td class="metric">CSI 300</td><td>Historical</td><td>108 / 119.2</td><td>0.285</td><td>&lt;0.001</td><td><span class="tl-badge Green">Green</span></td></tr>
+<tr><td class="metric">CSI 300</td><td>Normal</td><td>94 / 119.2</td><td>0.014</td><td>&lt;0.001</td><td><span class="tl-badge Green">Green</span></td></tr>
+<tr><td class="metric">CSI 300</td><td>EWMA</td><td>113 / 119.2</td><td>0.557</td><td>0.251</td><td><span class="tl-badge Green">Green</span></td></tr>
+</tbody></table></div></div>
+<div><h3 style="font-family:var(--serif);font-size:17px;margin-bottom:14px;">VaR &mdash; 99% confidence</h3><div class="tl-table-wrap"><table class="tl-table"><thead><tr><th>Index</th><th>Model</th><th>Exc. / Exp.</th><th>Kupiec p</th><th>Indep. p</th><th>Basel</th></tr></thead><tbody>
+<tr><td class="metric">S&amp;P 500</td><td>Historical</td><td>35 / 25.1</td><td>0.062</td><td>0.001</td><td><span class="tl-badge Yellow">Yellow</span></td></tr>
+<tr><td class="metric">S&amp;P 500</td><td>Normal</td><td>60 / 25.1</td><td>&lt;0.001</td><td>&lt;0.001</td><td><span class="tl-badge Red">Red</span></td></tr>
+<tr><td class="metric">S&amp;P 500</td><td>EWMA</td><td>60 / 25.1</td><td>&lt;0.001</td><td>0.069</td><td><span class="tl-badge Red">Red</span></td></tr>
+<tr><td class="metric">CSI 300</td><td>Historical</td><td>26 / 23.8</td><td>0.661</td><td>0.002</td><td><span class="tl-badge Green">Green</span></td></tr>
+<tr><td class="metric">CSI 300</td><td>Normal</td><td>48 / 23.8</td><td>&lt;0.001</td><td>&lt;0.001</td><td><span class="tl-badge Red">Red</span></td></tr>
+<tr><td class="metric">CSI 300</td><td>EWMA</td><td>55 / 23.8</td><td>&lt;0.001</td><td>0.170</td><td><span class="tl-badge Red">Red</span></td></tr>
+</tbody></table></div></div>
+  </div>
+  <p style="font-size:14px;color:var(--mid);max-width:760px;margin:36px 0 20px;">
+    <strong>Expected Shortfall</strong> is tested with the Acerbi&ndash;Szekely Z2 statistic (expected value 0 under a correct model; negative means tail
+    losses are larger than forecast). P-values come from 2,000 Monte Carlo paths drawn from each model&apos;s own forecast distribution.
+  </p>
+  <div class="two-col">
+<div><h3 style="font-family:var(--serif);font-size:17px;margin-bottom:14px;">ES &mdash; 95% confidence</h3><div class="tl-table-wrap"><table class="tl-table"><thead><tr><th>Index</th><th>Model</th><th>Z2</th><th>MC p</th><th>Realised / forecast</th><th>Result</th></tr></thead><tbody>
+<tr><td class="metric">S&amp;P 500</td><td>Historical</td><td>-0.13</td><td>0.107</td><td>1.04&times;</td><td><span class="tl-badge Green">Pass</span></td></tr>
+<tr><td class="metric">S&amp;P 500</td><td>Normal</td><td>-0.39</td><td>&lt;0.001</td><td>1.32&times;</td><td><span class="tl-badge Red">Reject</span></td></tr>
+<tr><td class="metric">S&amp;P 500</td><td>EWMA</td><td>-0.35</td><td>&lt;0.001</td><td>1.19&times;</td><td><span class="tl-badge Red">Reject</span></td></tr>
+<tr><td class="metric">CSI 300</td><td>Historical</td><td>0.03</td><td>0.664</td><td>1.06&times;</td><td><span class="tl-badge Green">Pass</span></td></tr>
+<tr><td class="metric">CSI 300</td><td>Normal</td><td>-0.04</td><td>0.306</td><td>1.33&times;</td><td><span class="tl-badge Green">Pass</span></td></tr>
+<tr><td class="metric">CSI 300</td><td>EWMA</td><td>-0.13</td><td>0.080</td><td>1.20&times;</td><td><span class="tl-badge Green">Pass</span></td></tr>
+</tbody></table></div></div>
+<div><h3 style="font-family:var(--serif);font-size:17px;margin-bottom:14px;">ES &mdash; 99% confidence</h3><div class="tl-table-wrap"><table class="tl-table"><thead><tr><th>Index</th><th>Model</th><th>Z2</th><th>MC p</th><th>Realised / forecast</th><th>Result</th></tr></thead><tbody>
+<tr><td class="metric">S&amp;P 500</td><td>Historical</td><td>-0.51</td><td>0.031</td><td>1.05&times;</td><td><span class="tl-badge Red">Reject</span></td></tr>
+<tr><td class="metric">S&amp;P 500</td><td>Normal</td><td>-2.31</td><td>&lt;0.001</td><td>1.36&times;</td><td><span class="tl-badge Red">Reject</span></td></tr>
+<tr><td class="metric">S&amp;P 500</td><td>EWMA</td><td>-1.99</td><td>&lt;0.001</td><td>1.19&times;</td><td><span class="tl-badge Red">Reject</span></td></tr>
+<tr><td class="metric">CSI 300</td><td>Historical</td><td>-0.20</td><td>0.308</td><td>1.09&times;</td><td><span class="tl-badge Green">Pass</span></td></tr>
+<tr><td class="metric">CSI 300</td><td>Normal</td><td>-1.64</td><td>&lt;0.001</td><td>1.31&times;</td><td><span class="tl-badge Red">Reject</span></td></tr>
+<tr><td class="metric">CSI 300</td><td>EWMA</td><td>-1.61</td><td>&lt;0.001</td><td>1.13&times;</td><td><span class="tl-badge Red">Reject</span></td></tr>
+</tbody></table></div></div>
   </div>
 </section>
 
@@ -764,28 +771,28 @@
     <ol class="findings-list">
       <li>
         <div class="findings-num">1</div>
-        <div><strong>VaR models are generally well-calibrated; CVaR is systematically over-conservative.</strong><br>
-        Across both markets and both confidence levels, Historical, Normal, and EWMA <em>VaR</em> models achieve Green or near-Green Traffic Light ratings. CVaR estimates consistently produce fewer exceptions than expected, suggesting the models over-estimate the magnitude of tail losses beyond the VaR threshold.</div>
+        <div><strong>At 95%, coverage is fine but exceptions cluster.</strong><br>
+        All models pass Kupiec except Normal on the CSI 300, which is too conservative (94 vs 119 expected), and all sit in the Basel Green zone. But Christoffersen&apos;s independence test rejects Historical and Normal in both markets: a 4-year window reacts slowly, so exceptions arrive in bursts. EWMA removes the clustering.</div>
       </li>
       <li>
         <div class="findings-num">2</div>
-        <div><strong>The S&amp;P 500 and CSI 300 show different calibration profiles at 95%.</strong><br>
-        At the 95% confidence level, the Normal VaR model is well-calibrated for the S&amp;P 500 (Green: 130 exceptions vs. 121 expected) but over-conservative for the CSI 300 (Red: 94 exceptions). This divergence may reflect the CSI 300&apos;s heavier tail structure, which the Normal model does not capture adequately.</div>
+        <div><strong>At 99%, Gaussian tails fail.</strong><br>
+        Normal and EWMA-Normal VaR are breached 2.0&ndash;2.4% of the time against 1% nominal (Kupiec p &lt; 0.001, Basel Red in both markets). Only Historical simulation passes: Green for the CSI 300, borderline Yellow for the S&amp;P 500 (35 vs 25).</div>
       </li>
       <li>
         <div class="findings-num">3</div>
-        <div><strong>EWMA VaR produces the highest exception counts.</strong><br>
-        The EWMA model generates substantially more exceptions than expected at both confidence levels (202 for S&amp;P 500 at 95%, 88 at 99%), consistently receiving Green status. This reflects EWMA&apos;s tendency to widen estimates during volatile periods, producing a less conservative daily bound that is breached more frequently.</div>
+        <div><strong>Parametric models under-estimate Expected Shortfall.</strong><br>
+        On exception days, realised losses are 13&ndash;36% larger than the Normal / EWMA ES forecast. The Acerbi&ndash;Szekely test rejects every parametric ES model at 99% in both markets.</div>
       </li>
       <li>
         <div class="findings-num">4</div>
-        <div><strong>At 99%, both indices perform comparably across VaR models.</strong><br>
-        The cross-market differences observed at 95% largely disappear at 99%, where all three VaR models receive Green ratings for both indices. This suggests that at deeper tail quantiles, the distributional differences between the two markets become less operationally significant for this backtesting framework.</div>
+        <div><strong>EWMA fixes timing, not magnitude.</strong><br>
+        Volatility weighting removes exception clustering but keeps the thin Gaussian tail. Filtered historical simulation or Student-t innovations are the natural next step.</div>
       </li>
       <li>
         <div class="findings-num">5</div>
-        <div><strong>Model choice matters more for the CSI 300 at 95%.</strong><br>
-        The CSI 300 shows more variation in backtesting performance across models at 95% (ranging from Green to Red), while the S&amp;P 500 is more consistent. This underscores the importance of model selection when applying Western-calibrated risk frameworks to Chinese equity markets.</div>
+        <div><strong>Each market breaks in its own crisis.</strong><br>
+        The rolling Basel chart shows the longest Red spells during the 2015&ndash;16 A-share crash for the CSI 300 and during the 2020 COVID shock for the S&amp;P 500.</div>
       </li>
     </ol>
   </div>

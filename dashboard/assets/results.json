@@ -1,102 +1,324 @@
 {
-  "tl_95": [
+  "test_window": {
+    "S&P 500": {
+      "start": "2014-01-07",
+      "end": "2023-12-29",
+      "n": 2513
+    },
+    "CSI 300": {
+      "start": "2014-03-10",
+      "end": "2023-12-29",
+      "n": 2384
+    }
+  },
+  "var_backtest_95": [
     {
-      "Metric": "Hist VaR",
-      "Expected": 121.0,
-      "SP500 Exc.": 133,
-      "SP500 TL": "Green",
-      "CSI Exc.": 108,
-      "CSI TL": "Yellow"
+      "Index": "S&P 500",
+      "Model": "Historical",
+      "n": 2513,
+      "Expected": 125.7,
+      "Exceptions": 133,
+      "Rate %": 5.29,
+      "Kupiec LR": 0.44,
+      "Kupiec p": 0.505,
+      "Christ. ind p": 0.0,
+      "Cond. cov p": 0.0,
+      "Basel zone": "Green"
     },
     {
-      "Metric": "Hist CVaR",
-      "Expected": 121.0,
-      "SP500 Exc.": 50,
-      "SP500 TL": "Red",
-      "CSI Exc.": 45,
-      "CSI TL": "Red"
+      "Index": "S&P 500",
+      "Model": "Normal",
+      "n": 2513,
+      "Expected": 125.7,
+      "Exceptions": 130,
+      "Rate %": 5.17,
+      "Kupiec LR": 0.16,
+      "Kupiec p": 0.6921,
+      "Christ. ind p": 0.0,
+      "Cond. cov p": 0.0,
+      "Basel zone": "Green"
     },
     {
-      "Metric": "Norm VaR",
-      "Expected": 121.0,
-      "SP500 Exc.": 130,
-      "SP500 TL": "Green",
-      "CSI Exc.": 94,
-      "CSI TL": "Red"
+      "Index": "S&P 500",
+      "Model": "EWMA",
+      "n": 2513,
+      "Expected": 125.7,
+      "Exceptions": 138,
+      "Rate %": 5.49,
+      "Kupiec LR": 1.24,
+      "Kupiec p": 0.2655,
+      "Christ. ind p": 0.373,
+      "Cond. cov p": 0.3618,
+      "Basel zone": "Green"
     },
     {
-      "Metric": "Norm CVaR",
-      "Expected": 121.0,
-      "SP500 Exc.": 82,
-      "SP500 TL": "Red",
-      "CSI Exc.": 58,
-      "CSI TL": "Red"
+      "Index": "CSI 300",
+      "Model": "Historical",
+      "n": 2384,
+      "Expected": 119.2,
+      "Exceptions": 108,
+      "Rate %": 4.53,
+      "Kupiec LR": 1.14,
+      "Kupiec p": 0.2852,
+      "Christ. ind p": 0.0,
+      "Cond. cov p": 0.0001,
+      "Basel zone": "Green"
     },
     {
-      "Metric": "EWMA VaR",
-      "Expected": 121.0,
-      "SP500 Exc.": 202,
-      "SP500 TL": "Green",
-      "CSI Exc.": 172,
-      "CSI TL": "Green"
+      "Index": "CSI 300",
+      "Model": "Normal",
+      "n": 2384,
+      "Expected": 119.2,
+      "Exceptions": 94,
+      "Rate %": 3.94,
+      "Kupiec LR": 6.03,
+      "Kupiec p": 0.0141,
+      "Christ. ind p": 0.0003,
+      "Cond. cov p": 0.0001,
+      "Basel zone": "Green"
     },
     {
-      "Metric": "EWMA CVaR",
-      "Expected": 121.0,
-      "SP500 Exc.": 50,
-      "SP500 TL": "Red",
-      "CSI Exc.": 44,
-      "CSI TL": "Red"
+      "Index": "CSI 300",
+      "Model": "EWMA",
+      "n": 2384,
+      "Expected": 119.2,
+      "Exceptions": 113,
+      "Rate %": 4.74,
+      "Kupiec LR": 0.35,
+      "Kupiec p": 0.5569,
+      "Christ. ind p": 0.2513,
+      "Cond. cov p": 0.4358,
+      "Basel zone": "Green"
     }
   ],
-  "tl_99": [
+  "var_backtest_99": [
     {
-      "Metric": "Hist VaR",
-      "Expected": 24.2,
-      "SP500 Exc.": 35,
-      "SP500 TL": "Green",
-      "CSI Exc.": 25,
-      "CSI TL": "Green"
+      "Index": "S&P 500",
+      "Model": "Historical",
+      "n": 2513,
+      "Expected": 25.1,
+      "Exceptions": 35,
+      "Rate %": 1.39,
+      "Kupiec LR": 3.49,
+      "Kupiec p": 0.0618,
+      "Christ. ind p": 0.0012,
+      "Cond. cov p": 0.0009,
+      "Basel zone": "Yellow"
     },
     {
-      "Metric": "Hist CVaR",
-      "Expected": 24.2,
-      "SP500 Exc.": 12,
-      "SP500 TL": "Red",
-      "CSI Exc.": 12,
-      "CSI TL": "Red"
+      "Index": "S&P 500",
+      "Model": "Normal",
+      "n": 2513,
+      "Expected": 25.1,
+      "Exceptions": 60,
+      "Rate %": 2.39,
+      "Kupiec LR": 35.18,
+      "Kupiec p": 0.0,
+      "Christ. ind p": 0.0,
+      "Cond. cov p": 0.0,
+      "Basel zone": "Red"
     },
     {
-      "Metric": "Norm VaR",
-      "Expected": 24.2,
-      "SP500 Exc.": 59,
-      "SP500 TL": "Green",
-      "CSI Exc.": 48,
-      "CSI TL": "Green"
+      "Index": "S&P 500",
+      "Model": "EWMA",
+      "n": 2513,
+      "Expected": 25.1,
+      "Exceptions": 60,
+      "Rate %": 2.39,
+      "Kupiec LR": 35.18,
+      "Kupiec p": 0.0,
+      "Christ. ind p": 0.0689,
+      "Cond. cov p": 0.0,
+      "Basel zone": "Red"
     },
     {
-      "Metric": "Norm CVaR",
-      "Expected": 24.2,
-      "SP500 Exc.": 47,
-      "SP500 TL": "Green",
-      "CSI Exc.": 34,
-      "CSI TL": "Green"
+      "Index": "CSI 300",
+      "Model": "Historical",
+      "n": 2384,
+      "Expected": 23.8,
+      "Exceptions": 26,
+      "Rate %": 1.09,
+      "Kupiec LR": 0.19,
+      "Kupiec p": 0.6612,
+      "Christ. ind p": 0.0023,
+      "Cond. cov p": 0.0086,
+      "Basel zone": "Green"
     },
     {
-      "Metric": "EWMA VaR",
-      "Expected": 24.2,
-      "SP500 Exc.": 88,
-      "SP500 TL": "Green",
-      "CSI Exc.": 79,
-      "CSI TL": "Green"
+      "Index": "CSI 300",
+      "Model": "Normal",
+      "n": 2384,
+      "Expected": 23.8,
+      "Exceptions": 48,
+      "Rate %": 2.01,
+      "Kupiec LR": 19.11,
+      "Kupiec p": 0.0,
+      "Christ. ind p": 0.0,
+      "Cond. cov p": 0.0,
+      "Basel zone": "Red"
     },
     {
-      "Metric": "EWMA CVaR",
-      "Expected": 24.2,
-      "SP500 Exc.": 16,
-      "SP500 TL": "Red",
-      "CSI Exc.": 15,
-      "CSI TL": "Red"
+      "Index": "CSI 300",
+      "Model": "EWMA",
+      "n": 2384,
+      "Expected": 23.8,
+      "Exceptions": 55,
+      "Rate %": 2.31,
+      "Kupiec LR": 30.05,
+      "Kupiec p": 0.0,
+      "Christ. ind p": 0.1702,
+      "Cond. cov p": 0.0,
+      "Basel zone": "Red"
+    }
+  ],
+  "basel_rolling_99": [
+    {
+      "Index": "S&P 500",
+      "Model": "Historical",
+      "% days Green": 66.6,
+      "% days Yellow": 22.9,
+      "% days Red": 10.5,
+      "Max 250d exceptions": 14
+    },
+    {
+      "Index": "S&P 500",
+      "Model": "Normal",
+      "% days Green": 43.0,
+      "% days Yellow": 31.7,
+      "% days Red": 25.3,
+      "Max 250d exceptions": 20
+    },
+    {
+      "Index": "S&P 500",
+      "Model": "EWMA",
+      "% days Green": 29.2,
+      "% days Yellow": 59.7,
+      "% days Red": 11.1,
+      "Max 250d exceptions": 13
+    },
+    {
+      "Index": "CSI 300",
+      "Model": "Historical",
+      "% days Green": 79.9,
+      "% days Yellow": 8.5,
+      "% days Red": 11.6,
+      "Max 250d exceptions": 17
+    },
+    {
+      "Index": "CSI 300",
+      "Model": "Normal",
+      "% days Green": 49.7,
+      "% days Yellow": 36.8,
+      "% days Red": 13.4,
+      "Max 250d exceptions": 24
+    },
+    {
+      "Index": "CSI 300",
+      "Model": "EWMA",
+      "% days Green": 31.3,
+      "% days Yellow": 63.5,
+      "% days Red": 5.2,
+      "Max 250d exceptions": 11
+    }
+  ],
+  "es_backtest_95": [
+    {
+      "Index": "S&P 500",
+      "Model": "Historical",
+      "Z2": -0.129,
+      "MC p-value": 0.107,
+      "Realised/forecast tail loss": 1.042,
+      "Verdict (5%)": "Not rejected"
+    },
+    {
+      "Index": "S&P 500",
+      "Model": "Normal",
+      "Z2": -0.388,
+      "MC p-value": 0.0,
+      "Realised/forecast tail loss": 1.317,
+      "Verdict (5%)": "Reject: ES too low"
+    },
+    {
+      "Index": "S&P 500",
+      "Model": "EWMA",
+      "Z2": -0.352,
+      "MC p-value": 0.0,
+      "Realised/forecast tail loss": 1.189,
+      "Verdict (5%)": "Reject: ES too low"
+    },
+    {
+      "Index": "CSI 300",
+      "Model": "Historical",
+      "Z2": 0.028,
+      "MC p-value": 0.664,
+      "Realised/forecast tail loss": 1.06,
+      "Verdict (5%)": "Not rejected"
+    },
+    {
+      "Index": "CSI 300",
+      "Model": "Normal",
+      "Z2": -0.043,
+      "MC p-value": 0.3065,
+      "Realised/forecast tail loss": 1.331,
+      "Verdict (5%)": "Not rejected"
+    },
+    {
+      "Index": "CSI 300",
+      "Model": "EWMA",
+      "Z2": -0.129,
+      "MC p-value": 0.0795,
+      "Realised/forecast tail loss": 1.196,
+      "Verdict (5%)": "Not rejected"
+    }
+  ],
+  "es_backtest_99": [
+    {
+      "Index": "S&P 500",
+      "Model": "Historical",
+      "Z2": -0.509,
+      "MC p-value": 0.031,
+      "Realised/forecast tail loss": 1.051,
+      "Verdict (5%)": "Reject: ES too low"
+    },
+    {
+      "Index": "S&P 500",
+      "Model": "Normal",
+      "Z2": -2.313,
+      "MC p-value": 0.0,
+      "Realised/forecast tail loss": 1.36,
+      "Verdict (5%)": "Reject: ES too low"
+    },
+    {
+      "Index": "S&P 500",
+      "Model": "EWMA",
+      "Z2": -1.994,
+      "MC p-value": 0.0,
+      "Realised/forecast tail loss": 1.187,
+      "Verdict (5%)": "Reject: ES too low"
+    },
+    {
+      "Index": "CSI 300",
+      "Model": "Historical",
+      "Z2": -0.198,
+      "MC p-value": 0.308,
+      "Realised/forecast tail loss": 1.086,
+      "Verdict (5%)": "Not rejected"
+    },
+    {
+      "Index": "CSI 300",
+      "Model": "Normal",
+      "Z2": -1.643,
+      "MC p-value": 0.0,
+      "Realised/forecast tail loss": 1.315,
+      "Verdict (5%)": "Reject: ES too low"
+    },
+    {
+      "Index": "CSI 300",
+      "Model": "EWMA",
+      "Z2": -1.614,
+      "MC p-value": 0.0,
+      "Realised/forecast tail loss": 1.126,
+      "Verdict (5%)": "Reject: ES too low"
     }
   ],
   "sp500_stats": {
